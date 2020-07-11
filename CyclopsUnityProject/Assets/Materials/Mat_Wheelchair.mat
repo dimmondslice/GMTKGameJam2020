@@ -144,6 +144,8 @@ Material:
     - Color_C385C65D: {r: 0, g: 0, b: 0, a: 0}
     - Color_C656F350: {r: 1, g: 1, b: 1, a: 0}
     - Color_DD985490: {r: 0.6226415, g: 0.5315949, b: 0.5315949, a: 0}
+    - Vector2_5889AEEC: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_A14C96AC: {r: 1, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

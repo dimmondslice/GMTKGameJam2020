@@ -87,7 +87,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_C385C65D: {r: 0, g: 0, b: 0, a: 0}
-    - Color_C656F350: {r: 0.47267708, g: 0.6149081, b: 0.8867924, a: 0}
-    - Color_DD985490: {r: 0.23113209, g: 0.35480234, b: 1, a: 0}
+    - Color_C656F350: {r: 1, g: 1, b: 1, a: 0}
+    - Color_DD985490: {r: 0.6896582, g: 0.73591906, b: 0.7735849, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
