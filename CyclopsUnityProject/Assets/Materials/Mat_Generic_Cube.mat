@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_floor
-  m_Shader: {fileID: 4800000, guid: 650dd9526735d5b46b79224bc6e94025, type: 3}
+  m_Name: Mat_Generic_Cube
+  m_Shader: {fileID: 4800000, guid: 0406db5a14f94604a8c57ccfbc9f3b46, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,7 +39,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: c3e4e8d5f8943f1419adc7adc6b1bc9f, type: 3}
-        m_Scale: {x: 25, y: 25}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
@@ -50,8 +50,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: c3e4e8d5f8943f1419adc7adc6b1bc9f, type: 3}
-        m_Scale: {x: 25, y: 25}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -70,14 +70,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_73208B0: 10
-    - Vector1_8408197: 0.55
+    - Vector1_73208B0: 9.68
+    - Vector1_8408197: 0.2
     - Vector1_96D0C600: 0
-    - Vector1_CB5823AA: 0.3
-    - Vector1_CD65496: 0.5
-    - Vector1_D99C848E: 0.7
-    - Vector1_FA33DFB3: 0
-    - Vector1_FCEBF276: 0.61
+    - Vector1_CB5823AA: 0.4
+    - Vector1_CD65496: 0.4
+    - Vector1_D99C848E: -1.2
+    - Vector1_FA33DFB3: -1.96
+    - Vector1_FCEBF276: 3
     - _AlphaClip: 0
     - _Blend: 0
     - _BlendOp: 0
@@ -107,7 +107,6 @@ Material:
     - _Outline: 0.01
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _SampleGI: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SoftParticlesEnabled: 0
@@ -125,7 +124,7 @@ Material:
     - Color_C656F350: {r: 1, g: 1, b: 1, a: 0}
     - Color_DD985490: {r: 1, g: 1, b: 1, a: 0}
     - Vector2_5889AEEC: {r: 0, g: 0, b: 0, a: 0}
-    - Vector2_A14C96AC: {r: 25, g: 25, b: 0, a: 0}
+    - Vector2_A14C96AC: {r: 1, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
