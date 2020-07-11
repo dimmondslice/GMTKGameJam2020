@@ -147,6 +147,8 @@ MonoBehaviour:
   m_dFrictionPercentPerSec: 0.2
   m_dLookPitchSensitivity: 100
   m_dLookYawSensitivity: 100
+  m_dSplosionFalloffDist: 7
+  m_dMaxSplosionKnockbackSpeed: 20
   m_rCameraTr: {fileID: 659063068686938012}
 --- !u!54 &659063068185615151
 Rigidbody:

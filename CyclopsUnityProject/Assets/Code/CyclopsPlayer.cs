@@ -15,6 +15,9 @@ public class CyclopsPlayer : MonoBehaviour
   public float m_dLookPitchSensitivity;
   public float m_dLookYawSensitivity;
 
+  public float m_dSplosionFalloffDist;
+  public float m_dMaxSplosionKnockbackSpeed;
+
   public Transform m_rCameraTr;
 
   // Privates
@@ -32,6 +35,7 @@ public class CyclopsPlayer : MonoBehaviour
 
     Cursor.lockState = CursorLockMode.Locked;
   }
+
   private void Update()
   {
     if (Input.GetButtonDown("Jump"))
@@ -40,6 +44,7 @@ public class CyclopsPlayer : MonoBehaviour
     }
   }
 
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
   void FixedUpdate()
   {
     m_newVelw = m_rRB.velocity;
@@ -48,8 +53,8 @@ public class CyclopsPlayer : MonoBehaviour
 
     Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
 
-    // apply slowdown friction when not inputting direction
-    if (moveInput.magnitude < .01)
+    // apply slowdown friction when not inputting direction AND ON THE GROUND FUTURE
+    //if (moveInput.magnitude < .01)
     {
       m_newVelw *= 1 - m_dFrictionPercentPerSec;
     }
@@ -71,6 +76,7 @@ public class CyclopsPlayer : MonoBehaviour
     m_gravityAcc = -2 * m_dJumpHeightMeters / (m_dTimeToJumpPeakSec * m_dTimeToJumpPeakSec);
     m_initJumpVel = 2 * m_dJumpHeightMeters / m_dTimeToJumpPeakSec;
     m_newVelw.y = m_rRB.velocity.y + m_gravityAcc * Time.deltaTime;
+
     // Set Velocity
     m_rRB.velocity = m_newVelw;
 
@@ -87,10 +93,34 @@ public class CyclopsPlayer : MonoBehaviour
       m_rCameraTr.RotateAround(m_rCameraTr.position, m_rCameraTr.right, pitchDelta);
     }
   }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
   public void OnJump()
   {
     Vector3 newVel = m_rRB.velocity;
     newVel.y = m_initJumpVel;
     m_rRB.velocity = newVel;
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  private void OnTriggerEnter(Collider other)
+  {
+    Explosion rExp = other.GetComponent<Explosion>();
+    if (rExp /* && !rExp.HasCollidedWithPlayer()*/)
+    {
+
+      rExp.SetCollidedWithPlayer();
+
+      Vector3 splosionVec = transform.position - rExp.transform.position;
+      float dist2Epicenter = splosionVec.magnitude;
+      splosionVec.Normalize();
+      splosionVec *= m_dMaxSplosionKnockbackSpeed * (m_dSplosionFalloffDist - dist2Epicenter);
+
+      //splosionVec.y *= 2;
+      //splosionVec.y += 4;
+      m_newVelw += splosionVec;
+      m_rRB.velocity = m_newVelw;
+
+    }
   }
 }
