@@ -36,7 +36,7 @@ public class Track : MonoBehaviour
     {
         Vector3 VectorToPlayer = trackTraveler.transform.position - trackNodes[currentNode];
         float distance = Vector3.SqrMagnitude(VectorToPlayer);
-        if (distance > 0.2f)
+        if (distance > 0.01f)
         {
             Vector3 facing = trackNodes[currentNode] - trackTraveler.transform.position;
             if(!isForward)
@@ -50,6 +50,7 @@ public class Track : MonoBehaviour
         }
         else
         {
+            trackTraveler.transform.position = trackNodes[currentNode];
             if(isForward)
             {
                 if (currentNode < trackNodes.GetLength(0) - 1)

@@ -7,7 +7,6 @@ public class LevelSelectScript : MonoBehaviour
 {
     public void ChangeScene(string sceneName)
     {
-        Debug.Log("You did it");
         SceneManager.LoadScene(sceneName);
     }
 }
