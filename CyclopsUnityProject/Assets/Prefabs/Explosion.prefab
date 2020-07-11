@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7880313006738566887}
   - component: {fileID: 2087837107}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 7880313007664816205}
   - component: {fileID: 7880313007664816206}
   - component: {fileID: 7880313007664816207}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

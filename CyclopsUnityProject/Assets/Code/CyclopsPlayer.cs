@@ -195,15 +195,14 @@ public class CyclopsPlayer : MonoBehaviour
 
     while (!m_bEyesClosed)
     {
-      Ray ray = new Ray(m_rCameraTr.position, m_rCameraTr.forward);
-      Debug.DrawLine(ray.origin, ray.direction * 100.0f, Color.red);
+      Instantiate(m_dLaserPrefab, m_drEar0.position, m_drEar0.transform.rotation, m_drEar0);
+      Instantiate(m_dLaserPrefab, m_drEar1.position, m_drEar1.transform.rotation, m_drEar1);
 
-      if (Physics.Raycast(ray, out RaycastHit hitInfo, 100.0f))
+      Ray ray = new Ray(m_rCameraTr.position, m_rCameraTr.forward);
+      int layerMaskNoExplosion = ~(1 << 8);
+      if (Physics.Raycast(ray, out RaycastHit hitInfo, 100.0f, layerMaskNoExplosion))
       {
         Instantiate(m_dExposionPrefab, hitInfo.point, Quaternion.identity);
-
-        Instantiate(m_dLaserPrefab, m_drEar0.position, m_drEar0.transform.rotation, m_drEar0);
-        Instantiate(m_dLaserPrefab, m_drEar1.position, m_drEar1.transform.rotation, m_drEar1);
       }
 
       yield return new WaitForSeconds(m_dExplosionFreqSec);
