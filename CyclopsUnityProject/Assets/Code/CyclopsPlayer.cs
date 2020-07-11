@@ -5,6 +5,8 @@ using UnityEngine;
 [SelectionBase]
 public class CyclopsPlayer : MonoBehaviour
 {
+  public bool m_dSHOOTEYEBLASTS = true;
+
   public float m_dJumpHeightMeters;
   public float m_dTimeToJumpPeakSec;
 
@@ -189,24 +191,30 @@ public class CyclopsPlayer : MonoBehaviour
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   private IEnumerator FireLaser_Cor()
   {
-    m_bFireLaser_CoreRunning = true;
-
-    yield return new WaitForSeconds(m_dExplosionStartUpTime);
-
-    while (!m_bEyesClosed)
+    if (m_dSHOOTEYEBLASTS)
     {
-      Instantiate(m_dLaserPrefab, m_drEar0.position, m_drEar0.transform.rotation, m_drEar0);
-      Instantiate(m_dLaserPrefab, m_drEar1.position, m_drEar1.transform.rotation, m_drEar1);
+      m_bFireLaser_CoreRunning = true;
 
-      Ray ray = new Ray(m_rCameraTr.position, m_rCameraTr.forward);
-      int layerMaskNoExplosion = ~(1 << 8);
-      if (Physics.Raycast(ray, out RaycastHit hitInfo, 100.0f, layerMaskNoExplosion))
+      yield return new WaitForSeconds(m_dExplosionStartUpTime);
+
+      while (!m_bEyesClosed)
       {
-        Instantiate(m_dExposionPrefab, hitInfo.point, Quaternion.identity);
+        Instantiate(m_dLaserPrefab, m_drEar0.position, m_drEar0.transform.rotation, m_drEar0);
+        Instantiate(m_dLaserPrefab, m_drEar1.position, m_drEar1.transform.rotation, m_drEar1);
+
+        Ray ray = new Ray(m_rCameraTr.position, m_rCameraTr.forward);
+        int layerMaskNoExplosion = ~(1 << 8);
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100.0f, layerMaskNoExplosion))
+        {
+          Instantiate(m_dExposionPrefab, hitInfo.point, Quaternion.identity);
+        }
+
+        yield return new WaitForSeconds(m_dExplosionFreqSec);
       }
 
-      yield return new WaitForSeconds(m_dExplosionFreqSec);
+      m_bFireLaser_CoreRunning = false;
     }
-    m_bFireLaser_CoreRunning = false;
+
+    yield return null;
   }
 }

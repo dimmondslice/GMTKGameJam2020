@@ -23,13 +23,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245769901}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.026176924, z: 0, w: 0.99965733}
   m_LocalPosition: {x: -0.42, y: 1.295, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 659063068686938012}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 3, z: 0}
 --- !u!1 &253364195
 GameObject:
   m_ObjectHideFlags: 0
@@ -53,13 +53,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253364195}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.026176924, z: 0, w: 0.99965733}
   m_LocalPosition: {x: 0.42, y: 1.2949998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 659063068686938012}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -3, z: 0}
 --- !u!1 &970110305
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,6 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b54d9a44d02da4048ad4fa7fd97b1e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_dSHOOTEYEBLASTS: 1
   m_dJumpHeightMeters: 3
   m_dTimeToJumpPeakSec: 0.4
   m_dTopFwdSpeedMPS: 10
@@ -294,7 +295,7 @@ MonoBehaviour:
     type: 3}
   m_dLaserPrefab: {fileID: 7364231865406364011, guid: c019755f21f501c46a086f3603f2fb25,
     type: 3}
-  m_dExplosionFreqSec: 0.8
+  m_dExplosionFreqSec: 0.7
   m_dExplosionStartUpTime: 0.35
   m_rCameraTr: {fileID: 659063068686938012}
   m_drBlinkBlock: {fileID: 970110306}
