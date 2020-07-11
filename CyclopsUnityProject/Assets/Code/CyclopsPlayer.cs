@@ -118,6 +118,7 @@ public class CyclopsPlayer : MonoBehaviour
 
     // Set Velocity
     m_rRB.velocity = m_newVelw;
+    m_rRB.angularVelocity = Vector3.zero;
 
     // Y Look Rotation
     {
@@ -130,11 +131,8 @@ public class CyclopsPlayer : MonoBehaviour
     //rot.SetColumn(1, Vector4(Mathf.Cos()))
    // Vector3 maxFwdUp = Vector3. (m_rCameraTr.forward
 
-    float angle = Mathf.Acos(Vector3.Dot(transform.forward, m_rCameraTr.forward)) * Mathf.Rad2Deg; //direction vectors are unit length so only need arccos for angle
-
 
     float signedAngle = Vector3.SignedAngle(transform.forward, m_rCameraTr.forward, transform.right);
-    //print(signedAngle);
     float pitchDelta = -1 * Input.GetAxis("Mouse Y") * m_dLookPitchSensitivity * Mathf.Deg2Rad;
 
    // if (Mathf.Sign(signedAngle) < 80.0f || Mathf.Sign(pitchDelta) == Mathf.Sign(signedAngle))
