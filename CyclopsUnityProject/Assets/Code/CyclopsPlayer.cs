@@ -44,46 +44,48 @@ public class CyclopsPlayer : MonoBehaviour
   {
     m_newVelw = m_rRB.velocity;
 
-    // X Z
+    // X Z Plane Movement
+
     Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
-    if(moveInput.magnitude > 1)
-      moveInput.Normalize();
+
+    // apply slowdown friction when not inputting direction
+    if (moveInput.magnitude < .01)
+    {
+      m_newVelw *= 1 - m_dFrictionPercentPerSec;
+    }
 
     moveInput.z *= m_dTopFwdSpeedMPS;
     moveInput.x *= m_dTopStrafeSpeedMPS;
-    moveInput = moveInput - transform.position; //to player space
     moveInput = transform.TransformVector(moveInput); //to worldspace
 
     m_newVelw.x += moveInput.x;
     m_newVelw.z += moveInput.z;
 
     // cap speed in each direction independently
-    //Vector3 newVelPlayerSpace = transform.InverseTransformVector(m_newVelw);
-    //newVelPlayerSpace.x = Mathf.Sign(newVelPlayerSpace.x) * Mathf.Min(newVelPlayerSpace.x, m_dTopStrafeSpeedMPS);
-    //newVelPlayerSpace.z = Mathf.Sign(newVelPlayerSpace.z) * Mathf.Min(newVelPlayerSpace.z, m_dTopFwdSpeedMPS);
-    //m_newVelw = transform.TransformVector(newVelPlayerSpace);
+    Vector3 newVelPlayerSpace = transform.InverseTransformVector(m_newVelw);
+    newVelPlayerSpace.x = Mathf.Sign(newVelPlayerSpace.x) * Mathf.Min(Mathf.Abs(newVelPlayerSpace.x), m_dTopStrafeSpeedMPS);
+    newVelPlayerSpace.z = Mathf.Sign(newVelPlayerSpace.z) * Mathf.Min(Mathf.Abs(newVelPlayerSpace.z), m_dTopFwdSpeedMPS);
+    m_newVelw = transform.TransformVector(newVelPlayerSpace);
 
-    // apply slowdown friction
-    //m_newVelw *= 1 - m_dFrictionPercentPerSec; 
-
-    // Y
+    // Y Gravity
     m_gravityAcc = -2 * m_dJumpHeightMeters / (m_dTimeToJumpPeakSec * m_dTimeToJumpPeakSec);
     m_initJumpVel = 2 * m_dJumpHeightMeters / m_dTimeToJumpPeakSec;
     m_newVelw.y = m_rRB.velocity.y + m_gravityAcc * Time.deltaTime;
-
-    //print(m_newVel);
+    // Set Velocity
     m_rRB.velocity = m_newVelw;
 
+    // Y Look Rotation
+    {
+      float yawDelta = Input.GetAxis("Mouse X") * m_dLookYawSensitivity * Mathf.Deg2Rad;
+      transform.RotateAround(transform.position, transform.up, yawDelta);
+    }
 
-    // Y Rotation
-
-    float yawDelta = Input.GetAxis("Mouse X") * m_dLookYawSensitivity * Mathf.Deg2Rad;
-    transform.RotateAround(transform.position, transform.up, yawDelta);
-
-    // Camera X Rot
-
-    float pitchDelta = -1 * Input.GetAxis("Mouse Y") * m_dLookPitchSensitivity * Mathf.Deg2Rad;
-    m_rCameraTr.RotateAround(m_rCameraTr.position, m_rCameraTr.right, pitchDelta);
+    // Camera Look X Rot
+    //if (Mathf.Abs(m_rCameraTr.localRotation.eulerAngles.x) < 80.0f)
+    {
+      float pitchDelta = -1 * Input.GetAxis("Mouse Y") * m_dLookPitchSensitivity * Mathf.Deg2Rad;
+      m_rCameraTr.RotateAround(m_rCameraTr.position, m_rCameraTr.right, pitchDelta);
+    }
   }
   public void OnJump()
   {
