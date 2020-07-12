@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_Pillar
+  m_Name: Mat_DarkerBlue
   m_Shader: {fileID: -6465566751694194690, guid: 02a6edb8f346a354c9f8fb102a1b9c64,
     type: 3}
   m_ShaderKeywords: _GLOSSINESS_FROM_BASE_ALPHA _SPECULAR_COLOR
@@ -142,7 +142,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_C385C65D: {r: 0, g: 0, b: 0, a: 0}
-    - Color_C656F350: {r: 0.9292453, g: 0.9722035, b: 1, a: 0}
+    - Color_C656F350: {r: 0.11449803, g: 0.22324818, b: 0.2924528, a: 0}
     - Color_DD985490: {r: 0.012148455, g: 0.01907136, b: 0.028301895, a: 0}
     - Vector2_5889AEEC: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_A14C96AC: {r: 1, g: 1, b: 0, a: 0}
