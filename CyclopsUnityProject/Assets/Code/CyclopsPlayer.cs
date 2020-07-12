@@ -97,6 +97,11 @@ public class CyclopsPlayer : MonoBehaviour
       OnJump();
     }
 
+    if(Input.GetKeyDown(KeyCode.Escape))
+    {
+      Application.Quit();
+    }
+
     // Change Eye State
     if (!m_bChangeEyeState_CorRunning)
     {
@@ -107,8 +112,13 @@ public class CyclopsPlayer : MonoBehaviour
         if (m_levelFinishedScreen)
         {
           string[] strs = SceneManager.GetActiveScene().name.Split('0');
-          string nextLevelName = "Level0" + (int.Parse(strs[1]) + 1);
-          SceneManager.LoadScene(nextLevelName);
+          int lmao = int.Parse(strs[1]);
+          string nextLevelName = "Level0" + (lmao + 1);
+          if(lmao < 6)
+            SceneManager.LoadScene(nextLevelName);
+          else
+            SceneManager.LoadScene("Level05");
+
           m_levelFinishedScreen = false;
           m_drNextLevelCanvas.gameObject.SetActive(false);
         }
