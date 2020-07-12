@@ -12,13 +12,15 @@ public class CyclopsPlayer : MonoBehaviour
 
   public float m_dTopFwdSpeedMPS;
   public float m_dTopStrafeSpeedMPS;
-  public float m_dFrictionPercentPerSec;
+  public float m_dGroundFrictionPerFrame;
+  public float m_dYVelocityClamp;
 
   public float m_dLookPitchSensitivity;
   public float m_dLookYawSensitivity;
 
-  public float m_dSplosionFalloffDist;
-  public float m_dMaxSplosionKnockbackSpeed;
+  public float m_dMinSplosionKnockbackMPS;
+  public float m_dMaxHorizontalSplosionKnockbackMPS;
+  public float m_dMaxVerticalSplosionKnockbackMPS;
 
   public float m_dEyeOpenMinSec;
   public float m_dEyeCloseMinSec;
@@ -27,6 +29,9 @@ public class CyclopsPlayer : MonoBehaviour
   public GameObject m_dLaserPrefab;
   public float m_dExplosionFreqSec;
   public float m_dExplosionStartUpTime;
+
+  public float m_dMaxHealth;
+  public float m_dHealthRegenPerSec;
 
   // Reference Gameobjects in prefab
   public Transform m_rCameraTr;
@@ -48,9 +53,12 @@ public class CyclopsPlayer : MonoBehaviour
   private bool m_bChangeEyeState_CorRunning = false;
   private bool m_bEyesClosed = false;
 
-  // Laser
   private bool m_bFireLaser_CoreRunning = false;
 
+  //health
+  private float m_currentHealth;
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
   void Start()
   {
     m_rRB = GetComponent<Rigidbody>();
@@ -60,15 +68,20 @@ public class CyclopsPlayer : MonoBehaviour
     m_drBlinkBlock.gameObject.SetActive(m_bEyesClosed);
     m_bEyesClosed = false;
     StartCoroutine(FireLaser_Cor());
+
+    m_currentHealth = m_dMaxHealth;
   }
 
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
   private void Update()
   {
-    if (Input.GetButtonDown("Jump"))
+    bool onGround = IsOnGround();
+    if (Input.GetButtonDown("Jump") && onGround)
     {
       OnJump();
     }
 
+    // Change Eye State
     if (!m_bChangeEyeState_CorRunning)
     {
       if (!m_bEyesClosed && Input.GetButton("Blink")) // close eyes
@@ -81,27 +94,42 @@ public class CyclopsPlayer : MonoBehaviour
         StartCoroutine(FireLaser_Cor());
       }
     }
+
+    //health
+    if(m_currentHealth < m_dMaxHealth)
+    {
+      m_currentHealth += m_dHealthRegenPerSec * Time.deltaTime;
+    }
+    else
+    {
+      m_currentHealth = m_dMaxHealth;
+    }
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   void FixedUpdate()
   {
+    bool onGround = IsOnGround();
+
     m_newVelw = m_rRB.velocity;
 
     // X Z Plane Movement
 
     Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
 
-    // apply slowdown friction when not inputting direction AND ON THE GROUND FUTURE
-    //if (moveInput.magnitude < .01)
+    if(onGround)
     {
-      m_newVelw *= 1 - m_dFrictionPercentPerSec;
+      m_newVelw *= 1 - m_dGroundFrictionPerFrame;
+
+      moveInput.z *= m_dTopFwdSpeedMPS;
+      moveInput.x *= m_dTopStrafeSpeedMPS;
+    }
+    else
+    {
+
     }
 
-    moveInput.z *= m_dTopFwdSpeedMPS;
-    moveInput.x *= m_dTopStrafeSpeedMPS;
     moveInput = transform.TransformVector(moveInput); //to worldspace
-
     m_newVelw.x += moveInput.x;
     m_newVelw.z += moveInput.z;
 
@@ -115,6 +143,8 @@ public class CyclopsPlayer : MonoBehaviour
     m_gravityAcc = -2 * m_dJumpHeightMeters / (m_dTimeToJumpPeakSec * m_dTimeToJumpPeakSec);
     m_initJumpVel = 2 * m_dJumpHeightMeters / m_dTimeToJumpPeakSec;
     m_newVelw.y = m_rRB.velocity.y + m_gravityAcc * Time.deltaTime;
+
+    m_newVelw.y = Mathf.Min(m_newVelw.y, m_dYVelocityClamp); // clamp upper y velocities
 
     // Set Velocity
     m_rRB.velocity = m_newVelw;
@@ -154,21 +184,39 @@ public class CyclopsPlayer : MonoBehaviour
   private void OnTriggerEnter(Collider other)
   {
     Explosion rExp = other.GetComponent<Explosion>();
-    if (rExp /* && !rExp.HasCollidedWithPlayer()*/)
+    if (rExp && !rExp.HasCollidedWithPlayer())
     {
-
       rExp.SetCollidedWithPlayer();
 
-      Vector3 splosionVec = transform.position - rExp.transform.position;
+      Vector3 playerhead = transform.position + new Vector3(.0f, 2.0f, .0f);
+      Vector3 splosionVec = playerhead - rExp.transform.position;
+
       float dist2Epicenter = splosionVec.magnitude;
+      float fallOff = 1 - (dist2Epicenter / rExp.m_dMaxDiameter);
+      fallOff = 1 - (fallOff * fallOff * fallOff);
+
+      //negate negative splosion force, apply to horizontal
+      if(splosionVec.y < 0.0f)
+      {
+        float mag = splosionVec.magnitude;
+        splosionVec.y = 0.0f;
+        splosionVec = splosionVec.normalized * mag;
+      }
       splosionVec.Normalize();
-      splosionVec *= m_dMaxSplosionKnockbackSpeed * (m_dSplosionFalloffDist - dist2Epicenter);
 
-      //splosionVec.y *= 2;
-      //splosionVec.y += 4;
-      m_newVelw += splosionVec;
+      //vert and horizontal components of knockback
+      Vector3 hSplosionVec = new Vector3(splosionVec.x, 0.0f, splosionVec.z);
+      hSplosionVec *= Mathf.Lerp(m_dMinSplosionKnockbackMPS, m_dMaxHorizontalSplosionKnockbackMPS, fallOff);
+      Vector3 vSplotionVec = new Vector3(0.0f, splosionVec.y, 0.0f);
+      vSplotionVec *= Mathf.Lerp(m_dMinSplosionKnockbackMPS, m_dMaxVerticalSplosionKnockbackMPS, fallOff);
+
+      splosionVec += hSplosionVec + vSplotionVec;
+      print(splosionVec);
+
+      // new vel
+      m_newVelw = Vector3.zero;
+      m_newVelw = splosionVec;
       m_rRB.velocity = m_newVelw;
-
     }
   }
 
@@ -214,5 +262,18 @@ public class CyclopsPlayer : MonoBehaviour
     }
 
     yield return null;
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  public bool IsOnGround()
+  {
+    Vector3 slightFootOffset = transform.position + new Vector3(0.0f, 0.1f, 0.0f);
+    Ray ray = new Ray(slightFootOffset, -Vector3.up);
+    int layerMaskNoExplosion = ~((1 << 8) | (1 << 2));
+    if (Physics.Raycast(ray, out RaycastHit hitInfo, 0.2f, layerMaskNoExplosion))
+    {
+      return true;
+    }
+    else return false;
   }
 }

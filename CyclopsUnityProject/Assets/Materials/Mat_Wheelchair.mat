@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Mat_Wheelchair
-  m_Shader: {fileID: -6465566751694194690, guid: 02a6edb8f346a354c9f8fb102a1b9c64,
+  m_Shader: {fileID: -6465566751694194690, guid: d56cffc8c4aac67428e343152fa22558,
     type: 3}
   m_ShaderKeywords: _GLOSSINESS_FROM_BASE_ALPHA _SPECULAR_COLOR
   m_LightmapFlags: 4
@@ -20,8 +20,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_D7D2919C:
+        m_Texture: {fileID: 2800000, guid: 481202b4038670447beabfcd2a4f045c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_F45B80C5:
-        m_Texture: {fileID: 2800000, guid: 1fd245eb5884b1f4483abe0da5f823d8, type: 3}
+        m_Texture: {fileID: 2800000, guid: d506943bd03e7674ab6feaf61395352d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlphaTex:
@@ -29,7 +33,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: b92d3923652b88c4bb4e168b17297a9e, type: 3}
+        m_Texture: {fileID: 2800000, guid: d506943bd03e7674ab6feaf61395352d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -65,7 +69,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b92d3923652b88c4bb4e168b17297a9e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1fd245eb5884b1f4483abe0da5f823d8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -94,24 +98,39 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - PixelSnap: 0
+    - Vector1_2A455339: 0.5
+    - Vector1_5A9E5888: 0
     - Vector1_73208B0: 150
     - Vector1_8408197: 0.2
     - Vector1_96D0C600: 0
     - Vector1_CB5823AA: 0.68
     - Vector1_CD65496: 0.14
+    - Vector1_CD9CB9E8: 0.1
     - Vector1_D99C848E: 0.7
+    - Vector1_F5DCAAE8: 0.5
     - Vector1_FA33DFB3: 0
     - Vector1_FCEBF276: 12.36
     - _AlphaClip: 0
     - _Blend: 0
+    - _BlendOp: 0
     - _BumpScale: 1
+    - _CameraFadingEnabled: 0
+    - _CameraFarFadeDistance: 2
+    - _CameraNearFadeDistance: 1
     - _ColorMask: 15
+    - _ColorMode: 0
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DistortionBlend: 0.5
+    - _DistortionEnabled: 0
+    - _DistortionStrength: 1
+    - _DistortionStrengthScaled: 0.1
     - _DstBlend: 0
     - _EnableExternalAlpha: 0
     - _EnvironmentReflections: 1
+    - _FlipbookBlending: 0
+    - _FlipbookMode: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossinessSource: 0
@@ -126,6 +145,9 @@ Material:
     - _Smoothness: 0
     - _SmoothnessSource: 1
     - _SmoothnessTextureChannel: 0
+    - _SoftParticlesEnabled: 0
+    - _SoftParticlesFarFadeDistance: 1
+    - _SoftParticlesNearFadeDistance: 0
     - _SpecSource: 0
     - _SpecularHighlights: 0
     - _SrcBlend: 1
@@ -144,13 +166,17 @@ Material:
     - Color_C385C65D: {r: 0, g: 0, b: 0, a: 0}
     - Color_C656F350: {r: 1, g: 1, b: 1, a: 0}
     - Color_DD985490: {r: 0.6226415, g: 0.5315949, b: 0.5315949, a: 0}
+    - Color_FA669E8D: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_5889AEEC: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_A14C96AC: {r: 1, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
+    - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
+    - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &8126641229903809967
