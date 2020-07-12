@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [SelectionBase]
 public class CyclopsPlayer : MonoBehaviour
@@ -59,9 +58,6 @@ public class CyclopsPlayer : MonoBehaviour
   //health
   private float m_currentHealth;
 
-  private bool m_levelFinishedScreen = false;
-  private int m_currentLevelNum = 1;
-
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   void Start()
   {
@@ -74,11 +70,6 @@ public class CyclopsPlayer : MonoBehaviour
     StartCoroutine(FireLaser_Cor());
 
     m_currentHealth = m_dMaxHealth;
-
-    m_levelFinishedScreen = false;
-
-    // init eyes to off
-    m_dSHOOTEYEBLASTS = false;
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,13 +87,6 @@ public class CyclopsPlayer : MonoBehaviour
       if (!m_bEyesClosed && Input.GetButton("Blink")) // close eyes
       {
         StartCoroutine(ChangeEyeState_Cor());
-
-        if(m_levelFinishedScreen)
-        {
-          SceneManager.LoadScene("level0" + m_currentLevelNum);
-          m_levelFinishedScreen = false;
-          //turn off canvas
-        }
       }
       else if (m_bEyesClosed && !Input.GetButton("Blink")) // open eyes
       {
@@ -162,7 +146,7 @@ public class CyclopsPlayer : MonoBehaviour
 
     m_newVelw.y = Mathf.Min(m_newVelw.y, m_dYVelocityClamp); // clamp upper y velocities
 
-    // Slide Along Walls
+    //adjust for walls
     Vector3 flatVel = m_newVelw;
     flatVel.y = 0.0f;
     Ray ray = new Ray(transform.position + new Vector3(0.0f, 0.2f, 0.0f), flatVel.normalized); //raycast a bit above the ground
@@ -172,18 +156,14 @@ public class CyclopsPlayer : MonoBehaviour
 
     if (Physics.Raycast(ray, out RaycastHit hitInfo, rayDist, layerMaskNoExplosion))
     {
-      if (!hitInfo.collider.isTrigger)
-      {
-        Vector3 wallRelativeUp = Vector3.Cross(flatVel.normalized, hitInfo.normal);
-        Vector3 displacementDir = Vector3.Cross(wallRelativeUp, hitInfo.normal);
-        displacementDir *= Vector3.Dot(flatVel, displacementDir); //scale by projecting intended vel onto dir perpendicular to wall normal
-        displacementDir.y = m_newVelw.y;
+      Vector3 wallRelativeUp = Vector3.Cross(flatVel.normalized, hitInfo.normal);
+      Vector3 displacementDir = Vector3.Cross(wallRelativeUp, hitInfo.normal);
+      displacementDir *= Vector3.Dot(flatVel, displacementDir); //scale by projecting intended vel onto dir perpendicular to wall normal
 
-        m_newVelw = displacementDir;
+      m_newVelw = displacementDir;
 
-        Debug.DrawLine(transform.position, transform.position + m_newVelw, Color.red);
-        //Debug.Break();
-      }
+      Debug.DrawLine(transform.position, transform.position + m_newVelw, Color.red);
+      //Debug.Break();
     }
 
     // Set Velocity
@@ -251,6 +231,7 @@ public class CyclopsPlayer : MonoBehaviour
       vSplotionVec *= Mathf.Lerp(m_dMinSplosionKnockbackMPS, m_dMaxVerticalSplosionKnockbackMPS, fallOff);
 
       splosionVec += hSplosionVec + vSplotionVec;
+      print(splosionVec);
 
       // new vel
       m_newVelw = Vector3.zero;
@@ -282,7 +263,7 @@ public class CyclopsPlayer : MonoBehaviour
 
       yield return new WaitForSeconds(m_dExplosionStartUpTime);
 
-      while (!m_bEyesClosed && m_dSHOOTEYEBLASTS)
+      while (!m_bEyesClosed)
       {
         Instantiate(m_dLaserPrefab, m_drEar0.position, m_drEar0.transform.rotation, m_drEar0);
         Instantiate(m_dLaserPrefab, m_drEar1.position, m_drEar1.transform.rotation, m_drEar1);
@@ -314,24 +295,5 @@ public class CyclopsPlayer : MonoBehaviour
       return true;
     }
     else return false;
-  }
-
-  public void SetFinishedLevel()
-  {
-    m_levelFinishedScreen = true;
-
-    m_currentLevelNum++;
-    //set canvas words here
-  }
-
-  public void StartEyeBlast()
-  {
-    m_dSHOOTEYEBLASTS = true;
-    StartCoroutine(FireLaser_Cor());
-  }
-
-  public void ResetLevelOnNextBlink()
-  {
-    m_levelFinishedScreen = true;
   }
 }
