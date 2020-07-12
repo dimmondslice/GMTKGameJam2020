@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_Red
+  m_Name: Mat_Teal
   m_Shader: {fileID: -6465566751694194690, guid: 02a6edb8f346a354c9f8fb102a1b9c64,
     type: 3}
   m_ShaderKeywords: _GLOSSINESS_FROM_BASE_ALPHA _SPECULAR_COLOR
@@ -150,7 +150,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_C385C65D: {r: 0.38431376, g: 0.058823533, b: 0.6039216, a: 0}
-    - Color_C656F350: {r: 1, g: 0.18396229, b: 0.9606626, a: 0}
+    - Color_C656F350: {r: 0.18431371, g: 1, b: 0.5854101, a: 0}
     - Color_DD985490: {r: 0.38356355, g: 0.05980776, b: 0.6037736, a: 0}
     - Color_FA669E8D: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_5889AEEC: {r: 0, g: 0, b: 0, a: 0}
