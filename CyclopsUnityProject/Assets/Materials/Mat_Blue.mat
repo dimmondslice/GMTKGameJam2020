@@ -60,6 +60,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _GlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainBump:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -128,6 +132,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecSource: 0
     - _SpecularHighlights: 0
+    - _SquashAmount: 1
     - _SrcBlend: 1
     - _Stencil: 0
     - _StencilComp: 8
@@ -142,7 +147,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_C385C65D: {r: 0, g: 0, b: 0, a: 0}
-    - Color_C656F350: {r: 0.4308473, g: 0.7055119, b: 0.8867924, a: 0}
+    - Color_C656F350: {r: 0.627451, g: 0.9421349, b: 1, a: 0}
     - Color_DD985490: {r: 0.012148455, g: 0.01907136, b: 0.028301895, a: 0}
     - Vector2_5889AEEC: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_A14C96AC: {r: 1, g: 1, b: 0, a: 0}
@@ -153,6 +158,8 @@ Material:
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
+    - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &8126641229903809967
 MonoBehaviour:
   m_ObjectHideFlags: 11
