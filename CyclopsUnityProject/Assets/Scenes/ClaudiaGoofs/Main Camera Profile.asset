@@ -106,7 +106,7 @@ MonoBehaviour:
     m_Value: 4
   intensity:
     m_OverrideState: 1
-    m_Value: 0.131
+    m_Value: 0
     min: 0
     max: 1
   response:
@@ -133,6 +133,6 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.277
+    m_Value: 0.054
     min: 0
     max: 1
