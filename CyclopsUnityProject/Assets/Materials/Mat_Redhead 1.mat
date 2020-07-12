@@ -8,18 +8,22 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Mat_Redhead 1
-  m_Shader: {fileID: 4800000, guid: 8d2bb70cbf9db8d4da26e15b26e74248, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: d56cffc8c4aac67428e343152fa22558,
+    type: 3}
   m_ShaderKeywords: _GLOSSINESS_FROM_BASE_ALPHA _SPECULAR_COLOR
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2050
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_D7D2919C:
+        m_Texture: {fileID: 2800000, guid: b92d3923652b88c4bb4e168b17297a9e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_F45B80C5:
         m_Texture: {fileID: 2800000, guid: b92d3923652b88c4bb4e168b17297a9e, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -106,12 +110,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - PixelSnap: 0
+    - Vector1_2A455339: 0.5
+    - Vector1_5A9E5888: 0
     - Vector1_73208B0: 150
     - Vector1_8408197: 0.2
     - Vector1_96D0C600: 0
     - Vector1_CB5823AA: 0.68
     - Vector1_CD65496: 0.14
+    - Vector1_CD9CB9E8: 0.1
     - Vector1_D99C848E: 0.7
+    - Vector1_F5DCAAE8: 0.5
     - Vector1_FA33DFB3: 0
     - Vector1_FCEBF276: 12.36
     - _AlphaClip: 0
@@ -168,6 +176,7 @@ Material:
     - Color_C385C65D: {r: 0, g: 0, b: 0, a: 0}
     - Color_C656F350: {r: 1, g: 1, b: 1, a: 0}
     - Color_DD985490: {r: 1, g: 1, b: 1, a: 0}
+    - Color_FA669E8D: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_5889AEEC: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_A14C96AC: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
