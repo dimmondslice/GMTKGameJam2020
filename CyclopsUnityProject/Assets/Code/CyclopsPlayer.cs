@@ -146,6 +146,26 @@ public class CyclopsPlayer : MonoBehaviour
 
     m_newVelw.y = Mathf.Min(m_newVelw.y, m_dYVelocityClamp); // clamp upper y velocities
 
+    //adjust for walls
+    Vector3 flatVel = m_newVelw;
+    flatVel.y = 0.0f;
+    Ray ray = new Ray(transform.position + new Vector3(0.0f, 0.2f, 0.0f), flatVel.normalized); //raycast a bit above the ground
+    float rayDist = 0.5f + flatVel.magnitude * Time.fixedDeltaTime;
+    int layerMaskNoExplosion = ~((1 << 8) | (1 << 2));
+    Debug.DrawLine(ray.origin, ray.origin + (ray.direction * rayDist), Color.blue);
+
+    if (Physics.Raycast(ray, out RaycastHit hitInfo, rayDist, layerMaskNoExplosion))
+    {
+      Vector3 wallRelativeUp = Vector3.Cross(flatVel.normalized, hitInfo.normal);
+      Vector3 displacementDir = Vector3.Cross(wallRelativeUp, hitInfo.normal);
+      displacementDir *= Vector3.Dot(flatVel, displacementDir); //scale by projecting intended vel onto dir perpendicular to wall normal
+
+      m_newVelw = displacementDir;
+
+      Debug.DrawLine(transform.position, transform.position + m_newVelw, Color.red);
+      //Debug.Break();
+    }
+
     // Set Velocity
     m_rRB.velocity = m_newVelw;
     m_rRB.angularVelocity = Vector3.zero;
