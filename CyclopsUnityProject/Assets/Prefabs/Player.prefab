@@ -293,7 +293,7 @@ MonoBehaviour:
   m_dMaxVerticalSplosionKnockbackMPS: 35
   m_dEyeOpenMinSec: 0.3
   m_dEyeCloseMinSec: 0.3
-  m_dExposionPrefab: {fileID: 7880313006738566880, guid: 4b308251667cae9479cf9b0d1741d819,
+  m_dExposionPrefab: {fileID: 7880313006738566880, guid: c63347526e39186419a88551090a5b60,
     type: 3}
   m_dLaserPrefab: {fileID: 730833645363721241, guid: 8d66cf20b603dbd49ab73a9efa31a801,
     type: 3}
