@@ -17,7 +17,7 @@ public class BlowShitUp : MonoBehaviour
     CyclopsPlayer rPlayer = collider.GetComponent<CyclopsPlayer>();
     if (rColRigid && !rPlayer)
     {
-      rColRigid.AddExplosionForce(1, transform.position, m_dMaxDiameter);
+      rColRigid.AddExplosionForce(500, transform.position, m_dMaxDiameter);
     }
   }
 
