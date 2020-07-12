@@ -9,8 +9,8 @@ public class StartLevelTrigger : MonoBehaviour
     CyclopsPlayer rPlayer = other.GetComponentInParent<CyclopsPlayer>();
     if (rPlayer)
     {
-      rPlayer.m_dSHOOTEYEBLASTS = true;
-      Destroy(gameObject);
+      rPlayer.StartEyeBlast();
+      //Destroy(gameObject);
     }
   }
 }
