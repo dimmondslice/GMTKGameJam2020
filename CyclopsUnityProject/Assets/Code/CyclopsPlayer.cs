@@ -254,7 +254,6 @@ public class CyclopsPlayer : MonoBehaviour
       vSplotionVec *= Mathf.Lerp(m_dMinSplosionKnockbackMPS, m_dMaxVerticalSplosionKnockbackMPS, fallOff);
 
       splosionVec += hSplosionVec + vSplotionVec;
-      print(splosionVec);
 
       // new vel
       m_newVelw = Vector3.zero;

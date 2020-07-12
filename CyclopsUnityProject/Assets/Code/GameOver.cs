@@ -14,7 +14,7 @@ public class GameOver : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    gameOverScreen.gameObject.SetActive(false);
+    //gameOverScreen.gameObject.SetActive(false);
   }
 
   private void OnTriggerEnter(Collider other)
