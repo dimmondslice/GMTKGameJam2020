@@ -23,7 +23,6 @@ public class NextLevel : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            Debug.Log("WIN");
             SceneManager.LoadScene(sceneName);
         }
     }
