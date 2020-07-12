@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.PostProcessing;
 
 [SelectionBase]
 public class CyclopsPlayer : MonoBehaviour
@@ -42,6 +43,7 @@ public class CyclopsPlayer : MonoBehaviour
   public Transform m_drBlinkBlock;
   public Transform m_drEar0;
   public Transform m_drEar1;
+  public PostProcessVolume m_drVolume;
 
 
   // Privates
@@ -56,6 +58,8 @@ public class CyclopsPlayer : MonoBehaviour
   // Eyes
   private bool m_bChangeEyeState_CorRunning = false;
   private bool m_bEyesClosed = false;
+
+  private Vignette m_vignette;
 
   private bool m_bFireLaser_CoreRunning = false;
   private float m_currentExplosionFreq;
@@ -106,7 +110,9 @@ public class CyclopsPlayer : MonoBehaviour
 
         if (m_levelFinishedScreen)
         {
-          SceneManager.LoadScene("level0" + m_currentLevelNum);
+          string[] strs = SceneManager.GetActiveScene().name.Split('0');
+          string nextLevelName = "Level0" + (int.Parse(strs[1]) + 1);
+          SceneManager.LoadScene(nextLevelName);
           m_levelFinishedScreen = false;
           //turn off canvas
         }
@@ -284,6 +290,11 @@ public class CyclopsPlayer : MonoBehaviour
 
     float wait = m_bEyesClosed ? m_dEyeCloseMinSec : m_dEyeOpenMinSec;
     yield return new WaitForSeconds(wait);
+
+    m_drVolume.profile.TryGetSettings(out m_vignette);
+
+    m_vignette.active = true;
+    m_vignette.intensity.value = 1.0f;
 
     m_bChangeEyeState_CorRunning = false;
   }
