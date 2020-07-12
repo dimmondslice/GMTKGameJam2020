@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [SelectionBase]
 public class CyclopsPlayer : MonoBehaviour
@@ -58,6 +59,11 @@ public class CyclopsPlayer : MonoBehaviour
   //health
   private float m_currentHealth;
 
+  // level
+  private bool m_levelFinishedScreen = false;
+  private int m_currentLevelNum = 1;
+
+
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   void Start()
   {
@@ -70,6 +76,11 @@ public class CyclopsPlayer : MonoBehaviour
     StartCoroutine(FireLaser_Cor());
 
     m_currentHealth = m_dMaxHealth;
+
+    m_levelFinishedScreen = false;
+
+    // init eyes to off
+    m_dSHOOTEYEBLASTS = false;
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -87,6 +98,13 @@ public class CyclopsPlayer : MonoBehaviour
       if (!m_bEyesClosed && Input.GetButton("Blink")) // close eyes
       {
         StartCoroutine(ChangeEyeState_Cor());
+
+        if (m_levelFinishedScreen)
+        {
+          SceneManager.LoadScene("level0" + m_currentLevelNum);
+          m_levelFinishedScreen = false;
+          //turn off canvas
+        }
       }
       else if (m_bEyesClosed && !Input.GetButton("Blink")) // open eyes
       {
@@ -96,7 +114,7 @@ public class CyclopsPlayer : MonoBehaviour
     }
 
     //health
-    if(m_currentHealth < m_dMaxHealth)
+    if (m_currentHealth < m_dMaxHealth)
     {
       m_currentHealth += m_dHealthRegenPerSec * Time.deltaTime;
     }
@@ -117,7 +135,7 @@ public class CyclopsPlayer : MonoBehaviour
 
     Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
 
-    if(onGround)
+    if (onGround)
     {
       m_newVelw *= 1 - m_dGroundFrictionPerFrame;
 
@@ -146,7 +164,7 @@ public class CyclopsPlayer : MonoBehaviour
 
     m_newVelw.y = Mathf.Min(m_newVelw.y, m_dYVelocityClamp); // clamp upper y velocities
 
-    //adjust for walls
+    // Slide Along Walls
     Vector3 flatVel = m_newVelw;
     flatVel.y = 0.0f;
     Ray ray = new Ray(transform.position + new Vector3(0.0f, 0.2f, 0.0f), flatVel.normalized); //raycast a bit above the ground
@@ -156,14 +174,19 @@ public class CyclopsPlayer : MonoBehaviour
 
     if (Physics.Raycast(ray, out RaycastHit hitInfo, rayDist, layerMaskNoExplosion))
     {
-      Vector3 wallRelativeUp = Vector3.Cross(flatVel.normalized, hitInfo.normal);
-      Vector3 displacementDir = Vector3.Cross(wallRelativeUp, hitInfo.normal);
-      displacementDir *= Vector3.Dot(flatVel, displacementDir); //scale by projecting intended vel onto dir perpendicular to wall normal
+      if (!hitInfo.collider.isTrigger)
+      {
+        Vector3 wallRelativeUp = Vector3.Cross(flatVel.normalized, hitInfo.normal);
+        Vector3 displacementDir = Vector3.Cross(wallRelativeUp, hitInfo.normal);
 
-      m_newVelw = displacementDir;
+        displacementDir *= Vector3.Dot(flatVel, displacementDir); //scale by projecting intended vel onto dir perpendicular to wall normal
+        displacementDir.y = m_newVelw.y;
 
-      Debug.DrawLine(transform.position, transform.position + m_newVelw, Color.red);
-      //Debug.Break();
+        m_newVelw = displacementDir;
+
+        Debug.DrawLine(transform.position, transform.position + m_newVelw, Color.red);
+        //Debug.Break();
+      }
     }
 
     // Set Velocity
@@ -179,17 +202,17 @@ public class CyclopsPlayer : MonoBehaviour
     // Camera Look X Rot
     //Matrix4x4 rot = new Matrix4x4();
     //rot.SetColumn(1, Vector4(Mathf.Cos()))
-   // Vector3 maxFwdUp = Vector3. (m_rCameraTr.forward
+    // Vector3 maxFwdUp = Vector3. (m_rCameraTr.forward
 
 
     float signedAngle = Vector3.SignedAngle(transform.forward, m_rCameraTr.forward, transform.right);
     float pitchDelta = -1 * Input.GetAxis("Mouse Y") * m_dLookPitchSensitivity * Mathf.Deg2Rad;
 
-   // if (Mathf.Sign(signedAngle) < 80.0f || Mathf.Sign(pitchDelta) == Mathf.Sign(signedAngle))
+    // if (Mathf.Sign(signedAngle) < 80.0f || Mathf.Sign(pitchDelta) == Mathf.Sign(signedAngle))
     {
       m_rCameraTr.RotateAround(m_rCameraTr.position, m_rCameraTr.right, pitchDelta);
     }
- 
+
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -216,7 +239,7 @@ public class CyclopsPlayer : MonoBehaviour
       fallOff = 1 - (fallOff * fallOff * fallOff);
 
       //negate negative splosion force, apply to horizontal
-      if(splosionVec.y < 0.0f)
+      if (splosionVec.y < 0.0f)
       {
         float mag = splosionVec.magnitude;
         splosionVec.y = 0.0f;
@@ -264,7 +287,7 @@ public class CyclopsPlayer : MonoBehaviour
 
       yield return new WaitForSeconds(m_dExplosionStartUpTime);
 
-      while (!m_bEyesClosed)
+      while (!m_bEyesClosed && m_dSHOOTEYEBLASTS)
       {
         Instantiate(m_dLaserPrefab, m_drEar0.position, m_drEar0.transform.rotation, m_drEar0);
         Instantiate(m_dLaserPrefab, m_drEar1.position, m_drEar1.transform.rotation, m_drEar1);
@@ -296,5 +319,27 @@ public class CyclopsPlayer : MonoBehaviour
       return true;
     }
     else return false;
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  public void SetFinishedLevel()
+  {
+    m_levelFinishedScreen = true;
+
+    m_currentLevelNum++;
+    //set canvas words here
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  public void StartEyeBlast()
+  {
+    m_dSHOOTEYEBLASTS = true;
+    StartCoroutine(FireLaser_Cor());
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  public void ResetLevelOnNextBlink()
+  {
+    m_levelFinishedScreen = true;
   }
 }

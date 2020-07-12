@@ -5,41 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-    public Canvas gameOverScreen;
-    public float gameOverTime = 10f;
+  public Canvas gameOverScreen;
+  public float gameOverTime = 10f;
 
-    private float gameOverDelta = 0f;
-    private bool isGameOver = false;
+  private float gameOverDelta = 0f;
+  private bool isGameOver = false;
 
-    // Start is called before the first frame update
-    void Start()
+  // Start is called before the first frame update
+  void Start()
+  {
+    gameOverScreen.gameObject.SetActive(false);
+  }
+
+  private void OnTriggerEnter(Collider other)
+  {
+    if (other.gameObject.tag == "Explosion")
     {
-        gameOverScreen.gameObject.SetActive(false);
-    }
+      gameOverScreen.gameObject.SetActive(true);
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Explosion")
+      isGameOver = true;
+
+      GameObject rPlayer = GameObject.FindGameObjectWithTag("Player");
+
+      if (rPlayer)
+      {
+        CyclopsPlayer rCyclops = rPlayer.GetComponent<CyclopsPlayer>();
+        if (rCyclops)
         {
-            gameOverScreen.gameObject.SetActive(true);
-            isGameOver = true;
+          rCyclops.ResetLevelOnNextBlink();
         }
+      }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(isGameOver)
-        {
-            if(gameOverDelta < gameOverTime)
-            {
-                gameOverDelta += Time.deltaTime;
-            }
-            else
-            {
-                string sceneName = SceneManager.GetActiveScene().name;
-                SceneManager.LoadScene(sceneName);
-            }
-        }
-    }
+  }
 }
+
