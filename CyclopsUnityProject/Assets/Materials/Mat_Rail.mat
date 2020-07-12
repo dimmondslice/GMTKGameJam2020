@@ -20,25 +20,25 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_floor
-  m_Shader: {fileID: 4800000, guid: 8d2bb70cbf9db8d4da26e15b26e74248, type: 3}
+  m_Name: Mat_Rail
+  m_Shader: {fileID: -6465566751694194690, guid: 02a6edb8f346a354c9f8fb102a1b9c64,
+    type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2050
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_F45B80C5:
-        m_Texture: {fileID: 2800000, guid: c3e4e8d5f8943f1419adc7adc6b1bc9f, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 4146881b2e4c65647aa6d22d18537a43, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 25, y: 25}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -50,7 +50,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4146881b2e4c65647aa6d22d18537a43, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 25, y: 25}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -70,11 +70,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_73208B0: 10
-    - Vector1_8408197: 0.55
+    - Vector1_73208B0: 100
+    - Vector1_8408197: 0.6
     - Vector1_96D0C600: 0
     - Vector1_CB5823AA: 0.3
-    - Vector1_CD65496: 0.5
+    - Vector1_CD65496: 0.54
     - Vector1_D99C848E: 0.7
     - Vector1_FA33DFB3: 0
     - Vector1_FCEBF276: 0.61
@@ -125,12 +125,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_C385C65D: {r: 0.046991818, g: 0.21132305, b: 0.3018868, a: 0}
-    - Color_C656F350: {r: 1, g: 1, b: 1, a: 0}
-    - Color_DD985490: {r: 1, g: 1, b: 1, a: 0}
+    - Color_C385C65D: {r: 0, g: 0, b: 0, a: 0}
+    - Color_C656F350: {r: 0.6320754, g: 0.37864897, b: 0.5176912, a: 0}
+    - Color_DD985490: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_5889AEEC: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_A14C96AC: {r: 25, g: 25, b: 0, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.8196079, g: 0.8196079, b: 0.8196079, a: 1}
