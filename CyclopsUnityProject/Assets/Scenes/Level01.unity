@@ -1235,8 +1235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ce807616823394d96b22e8948b93f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dTimeToMaxDiameter: 1
-  m_dMaxDiameter: 5
 --- !u!135 &325582495
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7388,9 +7386,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 970110305, guid: 092e8ff2628e22b45b3889249213b639, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 970110308, guid: 092e8ff2628e22b45b3889249213b639, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1792443753, guid: 092e8ff2628e22b45b3889249213b639, type: 3}
       propertyPath: m_RenderPostProcessing
