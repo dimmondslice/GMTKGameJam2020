@@ -170,11 +170,20 @@ public class CyclopsPlayer : MonoBehaviour
     {
       rExp.SetCollidedWithPlayer();
 
-      Vector3 playerhead = transform.position + new Vector3(.0f, 2.0f, .0f);
+      Vector3 playerhead = transform.position + new Vector3(.0f, 1.0f, .0f);
       Vector3 splosionVec = playerhead - rExp.transform.position;
       float dist2Epicenter = splosionVec.magnitude;
       splosionVec.Normalize();
       splosionVec *= m_dMaxSplosionKnockbackSpeed * (m_dSplosionFalloffDist - dist2Epicenter);
+  
+      //negate negative splosion force, apply to horizontal
+      if(splosionVec.y < 0.0f)
+      {
+        float mag = splosionVec.magnitude;
+        splosionVec.y = 0.0f;
+        splosionVec = splosionVec.normalized * mag;
+      }
+      Vector3 hSplosionVec = new Vector3(splosionVec.x, 0.0f, splosionVec.z);
 
       m_newVelw = Vector3.zero;
       m_newVelw = splosionVec;
