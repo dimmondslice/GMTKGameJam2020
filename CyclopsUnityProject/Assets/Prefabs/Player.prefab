@@ -553,6 +553,7 @@ MonoBehaviour:
   m_drBlinkBlock: {fileID: 970110306}
   m_drEar0: {fileID: 253364196}
   m_drEar1: {fileID: 245769902}
+  m_drNextLevelCanvas: {fileID: 1987436369}
 --- !u!54 &659063068185615151
 Rigidbody:
   m_ObjectHideFlags: 0

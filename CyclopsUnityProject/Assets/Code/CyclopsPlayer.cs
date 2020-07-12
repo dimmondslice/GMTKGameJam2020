@@ -42,6 +42,7 @@ public class CyclopsPlayer : MonoBehaviour
   public Transform m_drBlinkBlock;
   public Transform m_drEar0;
   public Transform m_drEar1;
+  public Transform m_drNextLevelCanvas;
 
   // Privates
   private Rigidbody m_rRB;
@@ -109,7 +110,7 @@ public class CyclopsPlayer : MonoBehaviour
           string nextLevelName = "Level0" + (int.Parse(strs[1]) + 1);
           SceneManager.LoadScene(nextLevelName);
           m_levelFinishedScreen = false;
-          //turn off canvas
+          m_drNextLevelCanvas.gameObject.SetActive(false);
         }
         else if (m_levelFailedScreen)
         {
@@ -341,7 +342,7 @@ public class CyclopsPlayer : MonoBehaviour
   {
     m_levelFinishedScreen = true;
 
-    m_currentLevelNum++;
+    m_drNextLevelCanvas.gameObject.SetActive(true);
     //set canvas words here
   }
 

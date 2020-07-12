@@ -32,12 +32,21 @@ public class GameOver : MonoBehaviour
         CyclopsPlayer rCyclops = rPlayer.GetComponent<CyclopsPlayer>();
         if (rCyclops)
         {
-          rCyclops.ResetLevelOnNextBlink();
+          //rCyclops.ResetLevelOnNextBlink();
         }
+
+        StartCoroutine(GameOverScreen_Cor());
       }
     }
   }
 
+  private IEnumerator GameOverScreen_Cor()
+  {
+    gameOverScreen.gameObject.SetActive(true);
+    yield return new WaitForSeconds(2.5f);
 
+    gameOverScreen.gameObject.SetActive(true);
+    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+  }
 }
 
