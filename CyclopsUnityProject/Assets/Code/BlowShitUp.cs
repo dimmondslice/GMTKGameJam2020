@@ -3,36 +3,38 @@ using System.Collections;
 
 public class BlowShitUp : MonoBehaviour
 {
-  public float duration;
-  float lifetime;
-  public float size;
+  public float m_dTimeToMaxDiameter;
+  public float m_dMaxDiameter;
 
-  Vector3 startScale;
-  Vector3 endScale;
+  private float m_lifetime;
+
+  private Vector3 m_startScale;
+  private Vector3 m_endScale;
 
   void OnTriggerEnter(Collider collider)
   {
-    Rigidbody colRigid = collider.GetComponent<Rigidbody>();
-    if (colRigid != null)
+    Rigidbody rColRigid = collider.GetComponent<Rigidbody>();
+    CyclopsPlayer rPlayer = collider.GetComponent<CyclopsPlayer>();
+    if (rColRigid && !rPlayer)
     {
-      colRigid.AddExplosionForce(1, transform.position, size);
+      rColRigid.AddExplosionForce(1, transform.position, m_dMaxDiameter);
     }
   }
 
   void Start()
   {
-    lifetime = 0;
-    startScale = Vector3.zero;
-    endScale = Vector3.one * size;
+    m_lifetime = 0;
+    m_startScale = Vector3.zero;
+    m_endScale = Vector3.one * m_dMaxDiameter;
   }
 
   // Update is called once per frame
   void Update()
   {
-    lifetime += Time.deltaTime;
+    m_lifetime += Time.deltaTime;
 
-    float x = 1 - (lifetime / duration);
+    float x = 1 - (m_lifetime / m_dTimeToMaxDiameter);
     float completion = 1 - (x * x * x * x * x * x);
-    transform.localScale = Vector3.Lerp(startScale, endScale, completion);
+    transform.localScale = Vector3.Lerp(m_startScale, m_endScale, completion);
   }
 }
