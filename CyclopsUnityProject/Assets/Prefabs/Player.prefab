@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 659063066982829692}
   m_Layer: 2
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -298,7 +298,9 @@ MonoBehaviour:
     type: 3}
   m_dLaserPrefab: {fileID: 730833645363721241, guid: 8d66cf20b603dbd49ab73a9efa31a801,
     type: 3}
-  m_dExplosionFreqSec: 0.7
+  m_dExplosionBaseFreqSec: 0.8
+  m_dExplosionMaxFreqSec: 0.3
+  m_dExpRampUpShots: 20
   m_dExplosionStartUpTime: 0.35
   m_dMaxHealth: 100
   m_dHealthRegenPerSec: 25
@@ -431,7 +433,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

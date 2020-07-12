@@ -26,9 +26,12 @@ public class CyclopsPlayer : MonoBehaviour
   public float m_dEyeOpenMinSec;
   public float m_dEyeCloseMinSec;
 
+  // Splode
   public GameObject m_dExposionPrefab;
   public GameObject m_dLaserPrefab;
-  public float m_dExplosionFreqSec;
+  public float m_dExplosionBaseFreqSec;
+  public float m_dExplosionMaxFreqSec;
+  public int m_dExpRampUpShots;
   public float m_dExplosionStartUpTime;
 
   public float m_dMaxHealth;
@@ -55,6 +58,7 @@ public class CyclopsPlayer : MonoBehaviour
   private bool m_bEyesClosed = false;
 
   private bool m_bFireLaser_CoreRunning = false;
+  private float m_currentExplosionFreq;
 
   //health
   private float m_currentHealth;
@@ -286,10 +290,13 @@ public class CyclopsPlayer : MonoBehaviour
 
       yield return new WaitForSeconds(m_dExplosionStartUpTime);
 
+      int shotsSinceStarted = 0;
       while (!m_bEyesClosed && m_dSHOOTEYEBLASTS)
       {
         Instantiate(m_dLaserPrefab, m_drEar0.position, m_drEar0.transform.rotation, m_drEar0);
         Instantiate(m_dLaserPrefab, m_drEar1.position, m_drEar1.transform.rotation, m_drEar1);
+
+        m_currentExplosionFreq = Mathf.Lerp(m_dExplosionBaseFreqSec, m_dExplosionMaxFreqSec, (float)(shotsSinceStarted / m_dExpRampUpShots));
 
         Ray ray = new Ray(m_rCameraTr.position, m_rCameraTr.forward);
         int layerMaskNoExplosion = ~(1 << 8);
@@ -298,8 +305,9 @@ public class CyclopsPlayer : MonoBehaviour
           Instantiate(m_dExposionPrefab, hitInfo.point, Quaternion.identity);
         }
 
-        yield return new WaitForSeconds(m_dExplosionFreqSec);
+        yield return new WaitForSeconds(m_currentExplosionFreq);
       }
+      m_currentExplosionFreq = m_dExplosionBaseFreqSec;
 
       m_bFireLaser_CoreRunning = false;
     }
