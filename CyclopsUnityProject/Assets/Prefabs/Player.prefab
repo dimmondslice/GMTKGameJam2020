@@ -288,8 +288,9 @@ MonoBehaviour:
   m_dYVelocityClamp: 40
   m_dLookPitchSensitivity: 100
   m_dLookYawSensitivity: 100
-  m_dSplosionFalloffDist: 10
-  m_dMaxSplosionKnockbackSpeed: 10
+  m_dMinSplosionKnockbackMPS: 30
+  m_dMaxHorizontalSplosionKnockbackMPS: 50
+  m_dMaxVerticalSplosionKnockbackMPS: 35
   m_dEyeOpenMinSec: 0.3
   m_dEyeCloseMinSec: 0.3
   m_dExposionPrefab: {fileID: 7880313006738566880, guid: 4b308251667cae9479cf9b0d1741d819,

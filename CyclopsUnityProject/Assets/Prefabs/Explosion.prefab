@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4750831277430611664}
   - component: {fileID: 4750831277430611667}
   - component: {fileID: 4750831277430611666}
-  - component: {fileID: 3220681823390394519}
   - component: {fileID: 2087837107}
   m_Layer: 8
   m_Name: Explosion
@@ -29,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7880313006738566880}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.7, y: 0.25, z: 10.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -108,20 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d0591e55b947f468c73e7295285ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3220681823390394519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7880313006738566880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17ce807616823394d96b22e8948b93f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   m_dTimeToMaxDiameter: 0.8
-  m_dMaxDiameter: 9
+  m_dMaxDiameter: 10
 --- !u!114 &2087837107
 MonoBehaviour:
   m_ObjectHideFlags: 0

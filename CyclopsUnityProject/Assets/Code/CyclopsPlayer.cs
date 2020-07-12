@@ -18,8 +18,9 @@ public class CyclopsPlayer : MonoBehaviour
   public float m_dLookPitchSensitivity;
   public float m_dLookYawSensitivity;
 
-  public float m_dSplosionFalloffDist;
-  public float m_dMaxSplosionKnockbackSpeed;
+  public float m_dMinSplosionKnockbackMPS;
+  public float m_dMaxHorizontalSplosionKnockbackMPS;
+  public float m_dMaxVerticalSplosionKnockbackMPS;
 
   public float m_dEyeOpenMinSec;
   public float m_dEyeCloseMinSec;
@@ -28,6 +29,9 @@ public class CyclopsPlayer : MonoBehaviour
   public GameObject m_dLaserPrefab;
   public float m_dExplosionFreqSec;
   public float m_dExplosionStartUpTime;
+
+  public float m_dMaxHealth;
+  public float m_dHealthRegenPerSec;
 
   // Reference Gameobjects in prefab
   public Transform m_rCameraTr;
@@ -49,8 +53,10 @@ public class CyclopsPlayer : MonoBehaviour
   private bool m_bChangeEyeState_CorRunning = false;
   private bool m_bEyesClosed = false;
 
-  // Laser
   private bool m_bFireLaser_CoreRunning = false;
+
+  //health
+  private float m_currentHealth;
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   void Start()
@@ -62,6 +68,8 @@ public class CyclopsPlayer : MonoBehaviour
     m_drBlinkBlock.gameObject.SetActive(m_bEyesClosed);
     m_bEyesClosed = false;
     StartCoroutine(FireLaser_Cor());
+
+    m_currentHealth = m_dMaxHealth;
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,6 +93,16 @@ public class CyclopsPlayer : MonoBehaviour
         StartCoroutine(ChangeEyeState_Cor());
         StartCoroutine(FireLaser_Cor());
       }
+    }
+
+    //health
+    if(m_currentHealth < m_dMaxHealth)
+    {
+      m_currentHealth += m_dHealthRegenPerSec * Time.deltaTime;
+    }
+    else
+    {
+      m_currentHealth = m_dMaxHealth;
     }
   }
 
@@ -170,12 +188,13 @@ public class CyclopsPlayer : MonoBehaviour
     {
       rExp.SetCollidedWithPlayer();
 
-      Vector3 playerhead = transform.position + new Vector3(.0f, 1.0f, .0f);
+      Vector3 playerhead = transform.position + new Vector3(.0f, 2.0f, .0f);
       Vector3 splosionVec = playerhead - rExp.transform.position;
+
       float dist2Epicenter = splosionVec.magnitude;
-      splosionVec.Normalize();
-      splosionVec *= m_dMaxSplosionKnockbackSpeed * (m_dSplosionFalloffDist - dist2Epicenter);
-  
+      float fallOff = 1 - (dist2Epicenter / rExp.m_dMaxDiameter);
+      fallOff = 1 - (fallOff * fallOff * fallOff);
+
       //negate negative splosion force, apply to horizontal
       if(splosionVec.y < 0.0f)
       {
@@ -183,8 +202,18 @@ public class CyclopsPlayer : MonoBehaviour
         splosionVec.y = 0.0f;
         splosionVec = splosionVec.normalized * mag;
       }
-      Vector3 hSplosionVec = new Vector3(splosionVec.x, 0.0f, splosionVec.z);
+      splosionVec.Normalize();
 
+      //vert and horizontal components of knockback
+      Vector3 hSplosionVec = new Vector3(splosionVec.x, 0.0f, splosionVec.z);
+      hSplosionVec *= Mathf.Lerp(m_dMinSplosionKnockbackMPS, m_dMaxHorizontalSplosionKnockbackMPS, fallOff);
+      Vector3 vSplotionVec = new Vector3(0.0f, splosionVec.y, 0.0f);
+      vSplotionVec *= Mathf.Lerp(m_dMinSplosionKnockbackMPS, m_dMaxVerticalSplosionKnockbackMPS, fallOff);
+
+      splosionVec += hSplosionVec + vSplotionVec;
+      print(splosionVec);
+
+      // new vel
       m_newVelw = Vector3.zero;
       m_newVelw = splosionVec;
       m_rRB.velocity = m_newVelw;
