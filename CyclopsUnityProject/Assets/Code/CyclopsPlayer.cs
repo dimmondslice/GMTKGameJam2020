@@ -104,6 +104,10 @@ public class CyclopsPlayer : MonoBehaviour
     {
       m_currentHealth = m_dMaxHealth;
     }
+
+    // init eyes to off
+    m_dSHOOTEYEBLASTS = false;
+
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -231,7 +235,6 @@ public class CyclopsPlayer : MonoBehaviour
       vSplotionVec *= Mathf.Lerp(m_dMinSplosionKnockbackMPS, m_dMaxVerticalSplosionKnockbackMPS, fallOff);
 
       splosionVec += hSplosionVec + vSplotionVec;
-      print(splosionVec);
 
       // new vel
       m_newVelw = Vector3.zero;
@@ -263,7 +266,7 @@ public class CyclopsPlayer : MonoBehaviour
 
       yield return new WaitForSeconds(m_dExplosionStartUpTime);
 
-      while (!m_bEyesClosed)
+      while (!m_bEyesClosed && m_dSHOOTEYEBLASTS)
       {
         Instantiate(m_dLaserPrefab, m_drEar0.position, m_drEar0.transform.rotation, m_drEar0);
         Instantiate(m_dLaserPrefab, m_drEar1.position, m_drEar1.transform.rotation, m_drEar1);
@@ -295,5 +298,10 @@ public class CyclopsPlayer : MonoBehaviour
       return true;
     }
     else return false;
+  }
+
+  public void SetFinishedLevel()
+  {
+    //set canvas words here
   }
 }
