@@ -12,7 +12,7 @@ GameObject:
   m_Layer: 2
   m_Name: ear1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245769901}
   m_LocalRotation: {x: 0, y: 0.026176924, z: 0, w: 0.99965733}
-  m_LocalPosition: {x: -0.42, y: 1.295, z: 0}
+  m_LocalPosition: {x: -0.42, y: -0.16, z: -0.023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 659063068686938012}
@@ -42,7 +42,7 @@ GameObject:
   m_Layer: 2
   m_Name: ear0
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253364195}
   m_LocalRotation: {x: 0, y: -0.026176924, z: 0, w: 0.99965733}
-  m_LocalPosition: {x: 0.42, y: 1.2949998, z: 0}
+  m_LocalPosition: {x: 0.42, y: -0.15999997, z: -0.023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 659063068686938012}
@@ -295,10 +295,12 @@ MonoBehaviour:
   m_dEyeCloseMinSec: 0.3
   m_dExposionPrefab: {fileID: 7880313006738566880, guid: 4b308251667cae9479cf9b0d1741d819,
     type: 3}
-  m_dLaserPrefab: {fileID: 7364231865406364011, guid: c019755f21f501c46a086f3603f2fb25,
+  m_dLaserPrefab: {fileID: 730833645363721241, guid: 8d66cf20b603dbd49ab73a9efa31a801,
     type: 3}
   m_dExplosionFreqSec: 0.7
   m_dExplosionStartUpTime: 0.35
+  m_dMaxHealth: 0
+  m_dHealthRegenPerSec: 0
   m_rCameraTr: {fileID: 659063068686938012}
   m_drBlinkBlock: {fileID: 970110306}
   m_drEar0: {fileID: 253364196}
