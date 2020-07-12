@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 3506309830461073370}
   - component: {fileID: 2119969017}
   - component: {fileID: 2119969018}
-  - component: {fileID: 2119969016}
+  - component: {fileID: 7149721911647902838}
   m_Layer: 0
   m_Name: Glasses_Geo
   m_TagString: Untagged
@@ -179,7 +179,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2119969016
+--- !u!114 &7149721911647902838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4315357301984197984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6406e47af117854fb84a29923fffccb, type: 3}
+  m_Script: {fileID: 11500000, guid: 58ab1d104111165409c89b7174b9cda5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7805125089261248686
