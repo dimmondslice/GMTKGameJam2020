@@ -65,6 +65,7 @@ public class CyclopsPlayer : MonoBehaviour
 
   // level
   private bool m_levelFinishedScreen = false;
+  private bool m_levelFailedScreen = false;
   private int m_currentLevelNum = 1;
 
 
@@ -107,6 +108,12 @@ public class CyclopsPlayer : MonoBehaviour
         {
           SceneManager.LoadScene("level0" + m_currentLevelNum);
           m_levelFinishedScreen = false;
+          //turn off canvas
+        }
+        else if (m_levelFailedScreen)
+        {
+          SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+          m_levelFailedScreen = false;
           //turn off canvas
         }
       }
@@ -347,6 +354,6 @@ public class CyclopsPlayer : MonoBehaviour
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   public void ResetLevelOnNextBlink()
   {
-    m_levelFinishedScreen = true;
+    m_levelFailedScreen = true;
   }
 }

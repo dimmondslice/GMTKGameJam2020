@@ -11,6 +11,7 @@ public class FinishLevel : MonoBehaviour
       rPlayer.m_dSHOOTEYEBLASTS = false;
 
       rPlayer.SetFinishedLevel();
+      Destroy(transform.root.gameObject);
     }
   }
 }

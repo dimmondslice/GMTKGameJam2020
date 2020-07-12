@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 732490483917315213}
   - component: {fileID: 2938723182902319155}
   - component: {fileID: 1958052764}
+  - component: {fileID: -5771803340017876831}
   m_Layer: 0
   m_Name: LaserVisual_Chris
   m_TagString: Untagged
@@ -60,7 +61,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6dcc1744c3dd1064abc40a81577c5c20, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -145,6 +146,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-5771803340017876831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730833645363721241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9853f1f7ecef6284fbf5e278a9121105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4065463886075479899
 GameObject:
   m_ObjectHideFlags: 0
