@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4283,7 +4283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -8788,7 +8788,12 @@ PrefabInstance:
     - target: {fileID: 1595833711857010492, guid: ae44bd47611ac4d4ea264f926680006c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.787
+      value: 18.515001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595833711857010492, guid: ae44bd47611ac4d4ea264f926680006c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.512
       objectReference: {fileID: 0}
     - target: {fileID: 1770176701088706109, guid: ae44bd47611ac4d4ea264f926680006c,
         type: 3}
@@ -11080,7 +11085,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 02632a4b636cf77429e43c358ba03483,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.433
+      value: 14.161
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 02632a4b636cf77429e43c358ba03483,
         type: 3}
@@ -11090,7 +11095,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 02632a4b636cf77429e43c358ba03483,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -22.847
+      value: -26.489
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 02632a4b636cf77429e43c358ba03483,
         type: 3}
@@ -12454,7 +12459,7 @@ PrefabInstance:
     - target: {fileID: 659063068185615149, guid: 092e8ff2628e22b45b3889249213b639,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.847
+      value: 15.538001
       objectReference: {fileID: 0}
     - target: {fileID: 659063068185615149, guid: 092e8ff2628e22b45b3889249213b639,
         type: 3}
@@ -12464,7 +12469,7 @@ PrefabInstance:
     - target: {fileID: 659063068185615149, guid: 092e8ff2628e22b45b3889249213b639,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -26.385
+      value: -30.027
       objectReference: {fileID: 0}
     - target: {fileID: 659063068185615149, guid: 092e8ff2628e22b45b3889249213b639,
         type: 3}
