@@ -248,6 +248,7 @@ public class CyclopsPlayer : MonoBehaviour
     m_bEyesClosed = !m_bEyesClosed;
 
     m_drBlinkBlock.gameObject.SetActive(m_bEyesClosed);
+
     float wait = m_bEyesClosed ? m_dEyeCloseMinSec : m_dEyeOpenMinSec;
     yield return new WaitForSeconds(wait);
 
