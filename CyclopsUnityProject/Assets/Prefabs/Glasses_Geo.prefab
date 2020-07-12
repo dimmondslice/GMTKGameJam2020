@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 2119969017}
   - component: {fileID: 2119969018}
   - component: {fileID: 7149721911647902838}
+  - component: {fileID: 1716097315388165809}
   m_Layer: 0
   m_Name: Glasses_Geo
   m_TagString: Untagged
@@ -271,6 +272,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ab1d104111165409c89b7174b9cda5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1716097315388165809
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4315357301984197984}
+  serializedVersion: 2
+  m_Mass: 0.5
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5184721841539368440
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +439,6 @@ GameObject:
   - component: {fileID: 2064546066160361558}
   - component: {fileID: 7980835037338090637}
   - component: {fileID: 758331360803315090}
-  - component: {fileID: 4773182116842698034}
   - component: {fileID: 7920884318802612910}
   m_Layer: 0
   m_Name: pCube174
@@ -495,22 +511,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!54 &4773182116842698034
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7805125089261248686}
-  serializedVersion: 2
-  m_Mass: 0.5
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &7920884318802612910
 BoxCollider:
   m_ObjectHideFlags: 0
